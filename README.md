@@ -1,1 +1,774 @@
-# projeto
+# <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danganronpa Fan Page</title>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    background:#171321;color:white;font-family:Arial,sans-serif;
+    text-align:center;margin:0;transition:background .4s
+}
+body.tema-vermelho{background:#2b1018}
+body.tema-azul{background:#101b2b}
+
+button{
+    background:#b58aff;color:#171321;border:0;padding:10px 18px;
+    border-radius:8px;cursor:pointer;font-weight:bold;margin:8px;
+    transition:.2s
+}
+button:hover{background:#e0caff;transform:scale(1.05)}
+button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+#tela-inicial{
+    min-height:100vh;background:radial-gradient(circle,#48204f,#21152f,#100d18);
+    display:flex;flex-direction:column;justify-content:center;
+    align-items:center;padding:20px
+}
+#tela-inicial h1{
+    font-size:clamp(45px,9vw,85px);color:#ff75dc;
+    text-shadow:0 0 10px #ff00c8,0 0 30px #b000ff;
+    margin:0;letter-spacing:5px
+}
+#tela-inicial h2{color:#d5b8ff;letter-spacing:5px;font-size:18px}
+.subtitulo{color:#d5b8ff;margin-top:35px;font-size:18px}
+#botao-start{
+    background:linear-gradient(90deg,#b58aff,#ff75dc);
+    color:#171321;font-size:23px;font-weight:bold;padding:17px 55px;
+    border-radius:5px;border:2px solid white;cursor:pointer;margin-top:30px;
+    box-shadow:0 0 20px #ff75dc88
+}
+#botao-start:hover{transform:scale(1.12);box-shadow:0 0 35px #ff75dc}
+.credito-inicial{position:absolute;bottom:20px;color:#bda9dc;font-size:13px}
+
+#site{display:none}
+#site.visivel{display:block}
+h1{color:#b58aff;font-size:40px}
+h2{color:#d5b8ff}
+
+#botao-pausa{
+    position:fixed;top:15px;right:15px;z-index:10;
+    background:#ff75dc;color:#171321;font-size:16px;
+    padding:12px 18px;box-shadow:0 0 12px #ff75dc88
+}
+
+#menu-pausa,#menu-configuracoes{
+    display:none;position:fixed;inset:0;background:#100d18ee;
+    justify-content:center;align-items:center;padding:20px;overflow-y:auto
+}
+#menu-pausa{z-index:20}
+#menu-configuracoes{z-index:30}
+#menu-pausa.aberto,#menu-configuracoes.aberto{display:flex}
+
+.painel-pausa{
+    background:linear-gradient(145deg,#302044,#171321);
+    border:3px solid #ff75dc;border-radius:18px;padding:35px 20px;
+    width:100%;max-width:400px;box-shadow:0 0 35px #ff75dc66
+}
+.painel-pausa h2{color:#ff75dc;font-size:32px;text-shadow:0 0 12px #ff00c8;margin-top:0}
+.painel-pausa h3{color:#b58aff;margin-top:22px}
+.botao-menu{display:block;width:90%;margin:15px auto;padding:14px;font-size:15px}
+
+#menu-configuracoes label{display:block;color:white;margin-top:20px;font-weight:bold}
+#volume{width:90%;accent-color:#ff75dc;margin-top:15px}
+#valor-volume{color:#ff75dc;font-weight:bold}
+.creditos-config{color:#d5b8ff;font-size:14px;line-height:1.7}
+
+.galeria{
+    display:flex;justify-content:center;align-items:flex-start;
+    flex-wrap:wrap;gap:20px;margin:30px
+}
+.personagem{
+    background:#29213b;padding:20px;border-radius:15px;width:280px
+}
+.personagem img{
+    width:180px;height:220px;object-fit:contain;
+    border-radius:15px;border:3px solid #b58aff
+}
+.curiosidade{display:none;color:#d5b8ff}
+.curiosidade.visivel{display:block}
+
+#julgamento{
+    background:linear-gradient(135deg,#190d2c,#350d38,#151020);
+    border:3px solid #b58aff;border-radius:20px;padding:30px 15px;
+    margin:50px auto;max-width:900px;box-shadow:0 0 25px #8d39bb66
+}
+#julgamento h2{font-size:32px;color:#ff75dc;text-shadow:0 0 10px #ff00c8}
+#area-julgamento{display:none}
+#area-julgamento.aberto{display:block}
+
+#lista-trials{
+    display:flex;justify-content:center;flex-wrap:wrap;gap:15px;
+    margin:25px auto;max-width:800px
+}
+.trial-card{
+    background:#29213b;border:2px solid #8e65c9;
+    border-radius:12px;padding:18px;width:220px
+}
+.trial-card.desbloqueado{border-color:#b58aff}
+.trial-card.concluido{border-color:#62e6a1}
+.trial-card.bloqueado{opacity:.55}
+.trial-card h3{color:#ff75dc}
+.trial-card p{color:#d5b8ff;font-size:14px}
+.trial-card button{width:90%}
+
+#painel-caso{
+    background:#21182f;border:2px solid #ff75dc;
+    border-radius:15px;padding:20px;margin:25px auto;max-width:750px
+}
+#painel-caso h2{font-size:28px}
+#evidencias,#depoimentos,#suspeitos{
+    display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:20px auto
+}
+.evidencia,.depoimento,.suspeito{
+    background:#29213b;border:2px solid #8e65c9;
+    border-radius:12px;padding:16px;width:200px
+}
+.evidencia h3{color:#ff75dc}
+.evidencia p,.depoimento p,.suspeito p{color:#d5b8ff}
+.depoimento{border-color:#ff75dc;width:250px}
+#desafio{
+    background:#241a36;border:2px solid #ff75dc;
+    border-radius:15px;padding:20px;margin:25px auto;max-width:650px
+}
+.opcao{
+    display:block;width:90%;max-width:450px;margin:12px auto
+}
+#resultado-pista,#resultado,#mensagem-final{
+    color:#ff75dc;font-weight:bold;margin-top:20px
+}
+#resultado{font-size:20px}
+#mensagem-final{font-size:22px}
+#tentativas{color:#ffb4e9;font-size:20px;font-weight:bold}
+#progresso{color:#d5b8ff;font-weight:bold}
+#abrir-julgamento{font-size:18px;padding:15px 25px;background:#ff75dc}
+#botao-proximo{display:none;background:#62e6a1;color:#10251a;font-size:17px;padding:14px 25px}
+#botao-reiniciar{display:none}
+#botao-voltar-trials{background:#55416d;color:white}
+
+footer{
+    margin-top:60px;padding:25px;background:#21182f;
+    border-top:2px solid #b58aff;color:#bda9dc
+}
+footer strong{color:#ff75dc;font-size:18px}
+
+@media(max-width:600px){
+    .galeria{margin:15px}
+    #julgamento{margin:25px 10px;padding:20px 10px}
+    .trial-card{width:90%}
+}
+</style>
+</head>
+
+<body>
+
+<div id="tela-inicial">
+    <h1>DANGANRONPA</h1>
+    <h2>HOPE'S PEAK ACADEMY</h2>
+    <p class="subtitulo">Welcome to the killing game...</p>
+    <button id="botao-start" onclick="iniciarJogo()">START GAME</button>
+    <p class="credito-inicial">Created by Tiago / Kreca • 2026</p>
+</div>
+
+<div id="menu-pausa">
+    <div class="painel-pausa">
+        <h2>PAUSED</h2>
+        <p>Take a break, student...</p>
+        <button class="botao-menu" onclick="retomarJogo()">RESUME GAME</button>
+        <button class="botao-menu" onclick="irPara('galeria')">CHARACTER GALLERY</button>
+        <button class="botao-menu" onclick="irPara('julgamento')">CLASS TRIALS</button>
+        <button class="botao-menu" onclick="abrirConfiguracoes()">SETTINGS</button>
+        <button class="botao-menu" onclick="voltarInicio()">MAIN MENU</button>
+    </div>
+</div>
+
+<div id="menu-configuracoes">
+    <div class="painel-pausa">
+        <h2>SETTINGS</h2>
+        <label for="volume">VOLUME</label>
+        <input type="range" id="volume" min="0" max="100" value="50">
+        <p id="valor-volume">50%</p>
+        <h3>THEME</h3>
+        <button class="botao-menu" onclick="mudarTema('roxo')">PURPLE</button>
+        <button class="botao-menu" onclick="mudarTema('vermelho')">RED</button>
+        <button class="botao-menu" onclick="mudarTema('azul')">BLUE</button>
+        <h3>CREATED BY</h3>
+        <div class="creditos-config">
+            <p>Tiago / Kreca</p>
+            <p>Danganronpa Fan Project • 2026</p>
+        </div>
+        <button class="botao-menu" onclick="fecharConfiguracoes()">BACK</button>
+    </div>
+</div>
+
+<div id="site">
+    <button id="botao-pausa" onclick="abrirPausa()">☰ PAUSE</button>
+
+    <h1>DANGANRONPA</h1>
+    <p>Bem-vindo à Hope's Peak Academy!</p>
+
+    <div class="galeria" id="galeria">
+        <div class="personagem">
+            <h2>Himiko Yumeno</h2>
+            <img src="himiko.png" alt="Himiko Yumeno">
+            <p>Ultimate Magician!</p>
+            <p>Nyeh... Magic is real!</p>
+            <button class="botao-curiosidade">Curiosidade</button>
+            <p class="curiosidade">Himiko acredita muito em sua magia e costuma dizer que está cansada!</p>
+        </div>
+
+        <div class="personagem">
+            <h2>Monokuma</h2>
+            <img src="monokuma.png" alt="Monokuma">
+            <p>Headmaster of Hope's Peak Academy!</p>
+            <p>Upupupu... It's punishment time!</p>
+            <button class="botao-curiosidade">Curiosidade</button>
+            <p class="curiosidade">Monokuma tem duas metades: uma branca e outra preta!</p>
+        </div>
+
+        <div class="personagem">
+            <h2>Monomi</h2>
+            <img src="monomi.png" alt="Monomi">
+            <p>Ultimate Teacher!</p>
+            <p>Usami Power! Pink Magic!</p>
+            <button class="botao-curiosidade">Curiosidade</button>
+            <p class="curiosidade">Monomi também é conhecida como Usami!</p>
+        </div>
+    </div>
+
+    <section id="julgamento">
+        <h2>CLASS TRIALS</h2>
+        <p>Seis mistérios esperam por você...</p>
+        <p id="progresso">Trials concluídos: 0 / 6</p>
+
+        <div id="lista-trials"></div>
+
+        <button id="abrir-julgamento" onclick="mostrarTrials()">
+            ESCOLHER UM CLASS TRIAL
+        </button>
+
+        <div id="area-julgamento">
+            <div id="painel-caso">
+                <h2 id="titulo-caso"></h2>
+                <h3 id="subtitulo-caso"></h3>
+                <p id="historia-caso"></p>
+
+                <h2>📁 EVIDÊNCIAS</h2>
+                <div id="evidencias"></div>
+
+                <h2>🗣️ DEPOIMENTOS</h2>
+                <div id="depoimentos"></div>
+
+                <div id="desafio">
+                    <h2 id="titulo-desafio">💥 FIND THE CONTRADICTION</h2>
+                    <p id="pergunta-desafio"></p>
+                    <div id="opcoes-desafio"></div>
+                    <p id="resultado-pista"></p>
+                </div>
+
+                <div id="area-acusacao" style="display:none">
+                    <h2>👥 ACUSAÇÃO FINAL</h2>
+                    <p>Quem é o verdadeiro culpado?</p>
+                    <p id="tentativas">Tentativas restantes: 3</p>
+                    <div id="suspeitos"></div>
+                </div>
+
+                <p id="resultado"></p>
+                <p id="mensagem-final"></p>
+
+                <button id="botao-proximo" onclick="proximoTrial()">UNLOCK NEXT TRIAL ➜</button>
+                <button id="botao-reiniciar" onclick="reiniciarTrial()">RETRY TRIAL</button>
+                <button id="botao-voltar-trials" onclick="voltarListaTrials()">BACK TO TRIAL SELECT</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 - Danganronpa Fan Page</p>
+        <p>Desenvolvido por <strong>Tiago / Kreca</strong></p>
+        <p>Fan project • Todos os direitos dos personagens pertencem aos seus respectivos criadores.</p>
+    </footer>
+</div>
+
+<script>
+// HISTÓRIAS DOS SEIS TRIALS
+const trials = [
+{
+    titulo:"CASE 001",
+    nome:"O Mistério do Doce",
+    dificuldade:"FÁCIL",
+    historia:"Uma caixa de doces desapareceu da sala de convivência. Três alunos são suspeitos.",
+    evidencias:[
+        "Um papel rosa foi encontrado perto da caixa.",
+        "Havia marcas de patas no chão.",
+        "Alguém mentiu sobre onde estava."
+    ],
+    depoimentos:[
+        ["Himiko","Eu estava praticando magia na sala de aula. Não cheguei perto dos doces!"],
+        ["Monomi","Eu estava organizando a biblioteca. Não vi ninguém na sala!"],
+        ["Monokuma","Eu estava sozinho no escritório. Não saí de lá por nenhum segundo!"]
+    ],
+    perguntas:[
+        {pergunta:"Monokuma afirma que não saiu do escritório. Qual pista contradiz isso?",correta:1}
+    ],
+    suspeitos:["Himiko","Monokuma","Monomi"],
+    culpado:"Monokuma"
+},
+{
+    titulo:"CASE 002",
+    nome:"O Bilhete Misterioso",
+    dificuldade:"MÉDIO",
+    historia:"Um bilhete misterioso apareceu na biblioteca. Alguém tentou esconder uma informação importante.",
+    evidencias:[
+        "Um bilhete com tinta azul.",
+        "Um livro foi retirado da estante às 15h.",
+        "Uma gota de tinta azul foi encontrada na mesa.",
+        "O relógio da biblioteca estava atrasado em dez minutos."
+    ],
+    depoimentos:[
+        ["Himiko","Não escrevi bilhete nenhum. Nem gosto de escrever!"],
+        ["Monomi","Eu vi alguém perto da estante, mas não consegui reconhecer."],
+        ["Monokuma","A biblioteca ficou vazia durante toda a tarde."],
+        ["Kokichi","Eu passei por lá às 15h, mas não toquei em nada."]
+    ],
+    perguntas:[
+        {pergunta:"Qual pista liga o bilhete ao local onde ele foi encontrado?",correta:2},
+        {pergunta:"Qual pista mostra que o horário contado por uma testemunha pode estar errado?",correta:3}
+    ],
+    suspeitos:["Himiko","Monokuma","Monomi","Kokichi"],
+    culpado:"Kokichi"
+},
+{
+    titulo:"CASE 003",
+    nome:"O Apagão",
+    dificuldade:"MÉDIO",
+    historia:"As luzes se apagaram por alguns minutos. Quando voltaram, um objeto importante havia sumido.",
+    evidencias:[
+        "Uma lanterna sem pilhas.",
+        "Pegadas molhadas perto da janela.",
+        "Um interruptor com marcas recentes.",
+        "Uma cortina rasgada.",
+        "Um bilhete dizendo 'eu não estava lá'."
+    ],
+    depoimentos:[
+        ["Himiko","Eu fiquei sentada no mesmo lugar durante o apagão."],
+        ["Monomi","Ouvi passos perto da janela."],
+        ["Monokuma","Ninguém poderia ter entrado ou saído da sala."],
+        ["Kokichi","Eu vi alguém usando uma lanterna."]
+    ],
+    perguntas:[
+        {pergunta:"Qual pista indica que alguém passou pela janela?",correta:1},
+        {pergunta:"Qual evidência contradiz a afirmação de que ninguém se moveu durante o apagão?",correta:2}
+    ],
+    suspeitos:["Himiko","Monokuma","Monomi","Kokichi"],
+    culpado:"Himiko"
+},
+{
+    titulo:"CASE 004",
+    nome:"A Chave Desaparecida",
+    dificuldade:"DIFÍCIL",
+    historia:"A chave de uma sala trancada desapareceu. Todos dizem que não tocaram nela.",
+    evidencias:[
+        "Uma cópia de chave com um pequeno risco.",
+        "Poeira removida da mesa.",
+        "Um pedaço de tecido preso na fechadura.",
+        "Um registro de entrada às 18h.",
+        "Uma janela que estava aberta."
+    ],
+    depoimentos:[
+        ["Himiko","Eu não entrei naquela sala."],
+        ["Monomi","A chave estava na mesa quando passei por lá."],
+        ["Monokuma","A sala ficou trancada o tempo todo."],
+        ["Kokichi","Eu estava no corredor às 18h."],
+        ["Maki","Não vi ninguém usando a janela."]
+    ],
+    perguntas:[
+        {pergunta:"Qual pista mostra que alguém mexeu na mesa?",correta:1},
+        {pergunta:"Qual evidência indica uma possível entrada pela janela?",correta:4},
+        {pergunta:"Qual registro ajuda a confirmar que alguém entrou na sala?",correta:3}
+    ],
+    suspeitos:["Himiko","Monomi","Monokuma","Kokichi","Maki"],
+    culpado:"Monomi"
+},
+{
+    titulo:"CASE 005",
+    nome:"A Gravação Falsa",
+    dificuldade:"MUITO DIFÍCIL",
+    historia:"Uma gravação parece provar que um aluno estava em outro lugar. Mas será que o áudio é verdadeiro?",
+    evidencias:[
+        "Uma gravação com ruído no fundo.",
+        "Um aparelho de áudio desligado.",
+        "Um relógio marcando 20h.",
+        "Uma anotação com o horário 19h30.",
+        "Um cabo desconectado.",
+        "Uma testemunha ouviu a mesma frase duas vezes."
+    ],
+    depoimentos:[
+        ["Himiko","Eu ouvi a gravação, mas não sei quem fez."],
+        ["Monomi","O aparelho estava desligado quando cheguei."],
+        ["Monokuma","A gravação foi feita exatamente às 20h."],
+        ["Kokichi","A frase parecia repetida."],
+        ["Maki","Vi um cabo solto perto do aparelho."]
+    ],
+    perguntas:[
+        {pergunta:"Qual pista indica que o aparelho não poderia estar gravando naquele momento?",correta:1},
+        {pergunta:"Qual evidência aponta para uma falha na conexão?",correta:4},
+        {pergunta:"Qual pista sugere que o áudio foi editado ou repetido?",correta:5}
+    ],
+    suspeitos:["Himiko","Monomi","Monokuma","Kokichi","Maki"],
+    culpado:"Monokuma"
+},
+{
+    titulo:"CASE 006",
+    nome:"A Sala Secreta",
+    dificuldade:"EXTREMA",
+    historia:"Uma sala secreta foi descoberta atrás de uma parede falsa. Várias pessoas escondem informações sobre ela.",
+    evidencias:[
+        "Uma parede com marcas de arranhões.",
+        "Um mapa com uma passagem desenhada.",
+        "Poeira acumulada em apenas um lado do corredor.",
+        "Uma chave com símbolo de coelho.",
+        "Uma mensagem apagada parcialmente.",
+        "Pegadas que terminam diante da parede."
+    ],
+    depoimentos:[
+        ["Himiko","Nunca ouvi falar de uma sala secreta."],
+        ["Monomi","O símbolo de coelho não me pertence."],
+        ["Monokuma","Não existe nenhuma passagem escondida nesta academia."],
+        ["Kokichi","Eu já vi esse mapa antes, mas não sei onde."],
+        ["Maki","As pegadas param exatamente na parede."],
+        ["Nagito","Talvez alguém esteja tentando esconder uma grande esperança."]
+    ],
+    perguntas:[
+        {pergunta:"Qual evidência indica que a parede pode esconder algo?",correta:0},
+        {pergunta:"Qual pista mostra que alguém conhecia a passagem?",correta:1},
+        {pergunta:"Qual evidência reforça que alguém passou pelo corredor recentemente?",correta:2},
+        {pergunta:"Qual pista contradiz a afirmação de que não existe passagem?",correta:5}
+    ],
+    suspeitos:["Himiko","Monomi","Monokuma","Kokichi","Maki","Nagito"],
+    culpado:"Monomi"
+}
+];
+
+let trialAtual = 0;
+let tentativas = 3;
+let perguntaAtual = 0;
+let julgamentoEncerrado = false;
+let trialsConcluidos = [];
+let trialDesbloqueado = 0;
+
+// INICIAR E MENUS
+function iniciarJogo(){
+    document.getElementById("tela-inicial").style.display="none";
+    document.getElementById("site").classList.add("visivel");
+    atualizarListaTrials();
+    window.scrollTo(0,0);
+}
+function abrirPausa(){document.getElementById("menu-pausa").classList.add("aberto")}
+function retomarJogo(){document.getElementById("menu-pausa").classList.remove("aberto")}
+function abrirConfiguracoes(){
+    document.getElementById("menu-pausa").classList.remove("aberto");
+    document.getElementById("menu-configuracoes").classList.add("aberto");
+}
+function fecharConfiguracoes(){
+    document.getElementById("menu-configuracoes").classList.remove("aberto");
+    document.getElementById("menu-pausa").classList.add("aberto");
+}
+function voltarInicio(){
+    document.getElementById("menu-pausa").classList.remove("aberto");
+    document.getElementById("menu-configuracoes").classList.remove("aberto");
+    document.getElementById("site").classList.remove("visivel");
+    document.getElementById("tela-inicial").style.display="flex";
+    window.scrollTo(0,0);
+}
+function irPara(id){
+    retomarJogo();
+    if(id==="julgamento") mostrarTrials();
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+// CONFIGURAÇÕES
+const controleVolume=document.getElementById("volume");
+controleVolume.addEventListener("input",function(){
+    document.getElementById("valor-volume").textContent=this.value+"%";
+});
+function mudarTema(tema){
+    document.body.classList.remove("tema-vermelho","tema-azul");
+    if(tema==="vermelho")document.body.classList.add("tema-vermelho");
+    if(tema==="azul")document.body.classList.add("tema-azul");
+}
+
+// CURIOSIDADES
+document.querySelectorAll(".botao-curiosidade").forEach(function(botao){
+    botao.addEventListener("click",function(){
+        botao.nextElementSibling.classList.toggle("visivel");
+    });
+});
+
+// LISTA DE TRIALS
+function atualizarListaTrials(){
+    const lista=document.getElementById("lista-trials");
+    lista.innerHTML="";
+    document.getElementById("progresso").textContent=
+        "Trials concluídos: "+trialsConcluidos.length+" / 6";
+
+    trials.forEach(function(trial,index){
+        const concluido=trialsConcluidos.includes(index);
+        const desbloqueado=index<=trialDesbloqueado;
+        const card=document.createElement("div");
+        card.className="trial-card "+(concluido?"concluido":desbloqueado?"desbloqueado":"bloqueado");
+
+        let estado=concluido?"✓ CONCLUÍDO":desbloqueado?"🔓 DESBLOQUEADO":"🔒 BLOQUEADO";
+        card.innerHTML=`
+            <h3>${trial.titulo}</h3>
+            <strong>${trial.nome}</strong>
+            <p>Dificuldade: ${trial.dificuldade}</p>
+            <p>${estado}</p>
+            <button ${desbloqueado?"":"disabled"} onclick="iniciarTrial(${index})">
+                ${concluido?"JOGAR NOVAMENTE":desbloqueado?"ENTRAR":"BLOQUEADO"}
+            </button>
+        `;
+        lista.appendChild(card);
+    });
+}
+function mostrarTrials(){
+    document.getElementById("area-julgamento").classList.remove("aberto");
+    document.getElementById("lista-trials").style.display="flex";
+    document.getElementById("abrir-julgamento").style.display="inline-block";
+    atualizarListaTrials();
+}
+function voltarListaTrials(){
+    document.getElementById("area-julgamento").classList.remove("aberto");
+    mostrarTrials();
+    document.getElementById("julgamento").scrollIntoView({behavior:"smooth"});
+}
+
+// INICIAR UM CASO
+function iniciarTrial(index){
+    if(index>trialDesbloqueado)return;
+    trialAtual=index;
+    tentativas=3;
+    perguntaAtual=0;
+    julgamentoEncerrado=false;
+
+    document.getElementById("lista-trials").style.display="none";
+    document.getElementById("abrir-julgamento").style.display="none";
+    document.getElementById("area-julgamento").classList.add("aberto");
+
+    const caso=trials[trialAtual];
+    document.getElementById("titulo-caso").textContent=caso.titulo+" — "+caso.nome;
+    document.getElementById("subtitulo-caso").textContent="DIFFICULTY: "+caso.dificuldade;
+    document.getElementById("historia-caso").textContent=caso.historia;
+
+    const evidencias=document.getElementById("evidencias");
+    evidencias.innerHTML="";
+    caso.evidencias.forEach(function(texto,index){
+        evidencias.innerHTML+=`
+            <div class="evidencia">
+                <h3>🔍 Pista ${index+1}</h3>
+                <p>${texto}</p>
+            </div>`;
+    });
+
+    const depoimentos=document.getElementById("depoimentos");
+    depoimentos.innerHTML="";
+    caso.depoimentos.forEach(function(depoimento){
+        depoimentos.innerHTML+=`
+            <div class="depoimento">
+                <h3>${depoimento[0]}</h3>
+                <p>"${depoimento[1]}"</p>
+            </div>`;
+    });
+
+    document.getElementById("area-acusacao").style.display="none";
+
+    // CORREÇÃO: FAZ AS CONTRADIÇÕES VOLTAREM A APARECER EM CADA NOVO CASO
+    document.getElementById("desafio").style.display="block";
+
+    document.getElementById("suspeitos").innerHTML="";
+    document.getElementById("resultado").textContent="";
+    document.getElementById("mensagem-final").textContent="";
+    document.getElementById("resultado-pista").textContent="";
+    document.getElementById("botao-proximo").style.display="none";
+    document.getElementById("botao-reiniciar").style.display="none";
+    document.getElementById("botao-voltar-trials").style.display="inline-block";
+    atualizarTentativas();
+    mostrarPergunta();
+    window.scrollTo({top:document.getElementById("julgamento").offsetTop,behavior:"smooth"});
+}
+
+// CONTRADIÇÕES
+function mostrarPergunta(){
+    const caso=trials[trialAtual];
+    const pergunta=caso.perguntas[perguntaAtual];
+
+    document.getElementById("titulo-desafio").textContent=
+        "💥 CONTRADICTION "+(perguntaAtual+1)+" / "+caso.perguntas.length;
+    document.getElementById("pergunta-desafio").textContent=pergunta.pergunta;
+
+    const opcoes=document.getElementById("opcoes-desafio");
+    opcoes.innerHTML="";
+    caso.evidencias.forEach(function(texto,index){
+        const botao=document.createElement("button");
+        botao.className="opcao";
+        botao.textContent="Pista "+(index+1)+" — "+texto;
+        botao.onclick=function(){verificarPista(index)};
+        opcoes.appendChild(botao);
+    });
+}
+function verificarPista(index){
+    if(julgamentoEncerrado)return;
+
+    const pergunta=trials[trialAtual].perguntas[perguntaAtual];
+    const resultado=document.getElementById("resultado-pista");
+
+    if(index===pergunta.correta){
+        resultado.textContent="CORRETO! Você encontrou a contradição! 🎯";
+        perguntaAtual++;
+
+        if(perguntaAtual<trials[trialAtual].perguntas.length){
+            setTimeout(function(){
+                resultado.textContent="";
+                mostrarPergunta();
+            },900);
+        }else{
+            setTimeout(mostrarAcusacao,900);
+        }
+    }else{
+        tentativas--;
+        atualizarTentativas();
+        resultado.textContent="ERRADO! Você perdeu uma tentativa.";
+
+        if(tentativas<=0){
+            perderTrial();
+        }
+    }
+}
+
+// ACUSAÇÃO FINAL
+function mostrarAcusacao(){
+    document.getElementById("desafio").style.display="none";
+    document.getElementById("area-acusacao").style.display="block";
+
+    const lista=document.getElementById("suspeitos");
+    lista.innerHTML="";
+
+    trials[trialAtual].suspeitos.forEach(function(nome){
+        const card=document.createElement("div");
+        card.className="suspeito";
+        card.innerHTML=`
+            <h3>${nome}</h3>
+            <p>Suspeito do caso</p>
+            <button onclick="escolherSuspeito('${nome}',this)">ACUSAR</button>
+        `;
+        lista.appendChild(card);
+    });
+}
+function escolherSuspeito(nome,botao){
+    if(julgamentoEncerrado)return;
+
+    const resultado=document.getElementById("resultado");
+    const mensagem=document.getElementById("mensagem-final");
+
+    if(nome===trials[trialAtual].culpado){
+        julgamentoEncerrado=true;
+        resultado.textContent="CORRECT! 🎉";
+        mensagem.textContent="TRUTH BULLET! Você descobriu o culpado!";
+        vencerTrial();
+    }else{
+        tentativas--;
+        atualizarTentativas();
+        botao.disabled=true;
+        botao.parentElement.style.opacity=".5";
+        resultado.textContent="WRONG ANSWER!";
+        mensagem.textContent="Essa acusação está errada. Pense novamente!";
+
+        if(tentativas<=0)perderTrial();
+    }
+}
+function atualizarTentativas(){
+    document.getElementById("tentativas").textContent=
+        "Tentativas restantes: "+tentativas;
+}
+function vencerTrial(){
+    julgamentoEncerrado=true;
+    if(!trialsConcluidos.includes(trialAtual)){
+        trialsConcluidos.push(trialAtual);
+    }
+    if(trialAtual===trialDesbloqueado&&trialDesbloqueado<5){
+        trialDesbloqueado++;
+    }
+
+    document.getElementById("mensagem-final").textContent=
+        "CASE CLOSED! Você venceu "+trials[trialAtual].titulo+"!";
+    document.getElementById("botao-reiniciar").style.display="inline-block";
+
+    if(trialAtual<5){
+        document.getElementById("botao-proximo").style.display="inline-block";
+    }else{
+        document.getElementById("mensagem-final").textContent=
+            "CONGRATULATIONS! VOCÊ CONCLUIU TODOS OS 6 CLASS TRIALS! 🏆";
+    }
+
+    salvarProgresso();
+    atualizarListaTrials();
+}
+function perderTrial(){
+    julgamentoEncerrado=true;
+    document.getElementById("resultado").textContent="GAME OVER!";
+    document.getElementById("mensagem-final").textContent=
+        "Você ficou sem tentativas. O culpado escapou...";
+    document.getElementById("botao-reiniciar").style.display="inline-block";
+
+    document.querySelectorAll("#opcoes-desafio button,#suspeitos button").forEach(function(botao){
+        botao.disabled=true;
+    });
+}
+function reiniciarTrial(){
+    iniciarTrial(trialAtual);
+}
+function proximoTrial(){
+    if(trialAtual<5){
+        iniciarTrial(trialAtual+1);
+    }
+}
+
+// SALVAMENTO DO PROGRESSO
+function salvarProgresso(){
+    const dados={
+        trialsConcluidos:trialsConcluidos,
+        trialDesbloqueado:trialDesbloqueado
+    };
+    try{
+        localStorage.setItem("krecaDanganronpaProgress",JSON.stringify(dados));
+    }catch(erro){
+        console.log("Não foi possível salvar o progresso.");
+    }
+}
+function carregarProgresso(){
+    try{
+        const salvo=localStorage.getItem("krecaDanganronpaProgress");
+        if(!salvo)return;
+
+        const dados=JSON.parse(salvo);
+        if(Array.isArray(dados.trialsConcluidos)){
+            trialsConcluidos=dados.trialsConcluidos.filter(function(numero){
+                return Number.isInteger(numero)&&numero>=0&&numero<6;
+            });
+        }
+        if(Number.isInteger(dados.trialDesbloqueado)){
+            trialDesbloqueado=Math.max(0,Math.min(5,dados.trialDesbloqueado));
+        }
+        atualizarListaTrials();
+    }catch(erro){
+        console.log("O progresso salvo não pôde ser carregado.");
+    }
+}
+carregarProgresso();
+
+</script>
+</body>
+</html>
