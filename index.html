@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -69,7 +67,6 @@ h2{color:#d5b8ff}
 .curiosidade{display:none;color:#d5b8ff}
 .curiosidade.visivel{display:block}
 
-/* CHARACTER DATABASE */
 #elenco{max-width:1100px;margin:55px auto;padding:25px 15px;background:linear-gradient(135deg,#21152f,#302044);border:2px solid #b58aff;border-radius:20px}
 #elenco h2{color:#ff75dc;font-size:32px}
 #filtros-elenco{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:20px auto}
@@ -79,29 +76,14 @@ h2{color:#d5b8ff}
 .card-elenco:hover{transform:translateY(-5px);border-color:#ff75dc;box-shadow:0 0 15px #ff75dc55}
 
 .avatar-elenco{
-    width:105px;
-    height:105px;
-    margin:5px auto 15px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#b58aff,#ff75dc);
-    color:#171321;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:32px;
-    font-weight:bold;
-    border:3px solid white;
-    overflow:hidden;
+    width:105px;height:105px;margin:5px auto 15px;
+    border-radius:50%;background:linear-gradient(135deg,#b58aff,#ff75dc);
+    color:#171321;display:flex;align-items:center;justify-content:center;
+    font-size:32px;font-weight:bold;border:3px solid white;overflow:hidden;
 }
-
 .avatar-elenco img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    border-radius:50%;
-    display:block;
+    width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;
 }
-
 .card-elenco h3{color:#ff75dc;margin:8px 0}
 .card-elenco p{color:#d5b8ff;font-size:13px;min-height:32px}
 .card-elenco button{width:90%}
@@ -111,30 +93,13 @@ h2{color:#d5b8ff}
 #ficha-personagem{width:100%;max-width:450px;max-height:85vh;overflow-y:auto;background:linear-gradient(145deg,#351344,#171321);border:3px solid #ff75dc;border-radius:18px;padding:25px;box-shadow:0 0 35px #ff75dc88}
 #ficha-personagem h2{color:#ff75dc}
 #ficha-personagem p{color:#d5b8ff;line-height:1.6}
-
 #ficha-avatar{
-    width:130px;
-    height:130px;
-    margin:10px auto;
-    border-radius:50%;
-    background:linear-gradient(135deg,#b58aff,#ff75dc);
-    color:#171321;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:40px;
-    font-weight:bold;
-    border:4px solid white;
-    overflow:hidden;
+    width:130px;height:130px;margin:10px auto;border-radius:50%;
+    background:linear-gradient(135deg,#b58aff,#ff75dc);color:#171321;
+    display:flex;justify-content:center;align-items:center;font-size:40px;
+    font-weight:bold;border:4px solid white;overflow:hidden;
 }
-
-#ficha-avatar img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    border-radius:50%;
-    display:block;
-}
+#ficha-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
 
 #julgamento{background:linear-gradient(135deg,#190d2c,#350d38,#151020);border:3px solid #b58aff;border-radius:20px;padding:30px 15px;margin:50px auto;max-width:900px;box-shadow:0 0 25px #8d39bb66}
 #julgamento h2{font-size:32px;color:#ff75dc;text-shadow:0 0 10px #ff00c8}
@@ -167,7 +132,6 @@ h2{color:#d5b8ff}
 #botao-reiniciar{display:none}
 #botao-voltar-trials{background:#55416d;color:white}
 
-/* TRUTH BULLET */
 #truth-bullet{display:none;position:relative;overflow:hidden;background:linear-gradient(135deg,#3b1550,#171321);border:3px solid #ff75dc;border-radius:15px;padding:22px 15px;margin:22px auto;max-width:550px;box-shadow:0 0 25px #ff75dc88}
 #truth-bullet.ativado{display:block;animation:truthBullet .7s ease}
 #truth-bullet h2{color:#ff75dc;font-size:30px;margin:5px 0 15px;text-shadow:0 0 15px #ff00c8}
@@ -178,7 +142,6 @@ h2{color:#d5b8ff}
 @keyframes truthBullet{0%{transform:scale(.2) rotate(-10deg);opacity:0}60%{transform:scale(1.12) rotate(3deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
 @keyframes bulletShine{to{left:150%}}
 
-/* NON-STOP DEBATE */
 #non-stop-debate{display:none;background:linear-gradient(135deg,#170d2c,#351044);border:3px solid #ff75dc;border-radius:18px;padding:22px 15px;margin:25px auto;max-width:700px;box-shadow:0 0 25px #ff75dc88}
 #non-stop-debate h2{color:#ff75dc;font-size:30px;text-shadow:0 0 12px #ff00c8}
 #non-stop-debate .instrucao{color:#d5b8ff;font-size:14px}
@@ -188,7 +151,6 @@ h2{color:#d5b8ff}
 #resultado-debate{color:#ff75dc;font-weight:bold;min-height:25px;margin-top:18px}
 #progresso-debate{color:#d5b8ff;font-weight:bold}
 
-/* RESULTADOS */
 #tela-resultados{display:none;position:fixed;inset:0;z-index:50;background:#090611ee;justify-content:center;align-items:center;padding:15px;overflow-y:auto}
 #tela-resultados.aberto{display:flex;animation:aparecerResultados .4s ease}
 .resultados-painel{width:100%;max-width:500px;background:linear-gradient(145deg,#351344,#171321);border:3px solid #ff75dc;border-radius:20px;padding:30px 20px;box-shadow:0 0 35px #ff75dc88}
@@ -271,20 +233,19 @@ footer strong{color:#ff75dc;font-size:18px}
 <p class="curiosidade">Himiko acredita muito em sua magia e costuma dizer que está cansada!</p>
 </div>
 <div class="personagem">
-<h2>Monokuma</h2><img src="Monokuma.png" alt="Monokuma">
+<h2>Monokuma</h2><img src="monokuma.png" alt="Monokuma">
 <p>Headmaster of Hope's Peak Academy!</p><p>Upupupu... It's punishment time!</p>
 <button class="botao-curiosidade">Curiosidade</button>
 <p class="curiosidade">Monokuma tem duas metades: uma branca e outra preta!</p>
 </div>
 <div class="personagem">
-<h2>Monomi</h2><img src="Monomi.png" alt="Monomi">
+<h2>Monomi</h2><img src="monomi.png" alt="Monomi">
 <p>Ultimate Teacher!</p><p>Usami Power! Pink Magic!</p>
 <button class="botao-curiosidade">Curiosidade</button>
 <p class="curiosidade">Monomi também é conhecida como Usami!</p>
 </div>
 </div>
 
-<!-- CHARACTER DATABASE -->
 <section id="elenco">
 <h2>🎭 CHARACTER DATABASE</h2>
 <p>Conheça os estudantes e personagens dos três jogos!</p>
@@ -475,7 +436,6 @@ const conquistas=[
 ];
 
 // CHARACTER DATABASE
-// As imagens do V1 estão na pasta assets.
 const personagensElenco=[
 {nome:"Makoto Naegi",talento:"Ultimate Lucky Student",jogo:"trigger",descricao:"Um estudante otimista que acredita no poder da esperança.",imagem:"assets/Makoto.png"},
 {nome:"Kyoko Kirigiri",talento:"Ultimate Detective",jogo:"trigger",descricao:"Uma investigadora misteriosa, inteligente e muito observadora.",imagem:"assets/Kyoko.png"},
@@ -494,22 +454,22 @@ const personagensElenco=[
 {nome:"Mukuro Ikusaba",talento:"Ultimate Soldier",jogo:"trigger",descricao:"Uma especialista em estratégia militar.",imagem:"assets/Mukuro.png"},
 {nome:"Chihiro Fujisaki",talento:"Ultimate Programmer",jogo:"trigger",descricao:"Um programador extremamente talentoso e dedicado.",imagem:"assets/Chihiro.png"},
 
-{nome:"Hajime Hinata",talento:"Ultimate ???",jogo:"goodbye",descricao:"Um estudante que tenta descobrir a verdade sobre seu próprio passado."},
-{nome:"Nagito Komaeda",talento:"Ultimate Lucky Student",jogo:"goodbye",descricao:"Um estudante obcecado pela esperança e por seu significado."},
-{nome:"Chiaki Nanami",talento:"Ultimate Gamer",jogo:"goodbye",descricao:"Uma gamer tranquila que adora videogames."},
-{nome:"Sonia Nevermind",talento:"Ultimate Princess",jogo:"goodbye",descricao:"Uma princesa curiosa sobre diferentes culturas."},
-{nome:"Kazuichi Soda",talento:"Ultimate Mechanic",jogo:"goodbye",descricao:"Um mecânico habilidoso que adora construir e consertar máquinas."},
-{nome:"Gundham Tanaka",talento:"Ultimate Breeder",jogo:"goodbye",descricao:"Um criador de animais com uma personalidade dramática."},
-{nome:"Fuyuhiko Kuzuryu",talento:"Ultimate Yakuza",jogo:"goodbye",descricao:"Um jovem líder de uma família Yakuza."},
-{nome:"Peko Pekoyama",talento:"Ultimate Swordswoman",jogo:"goodbye",descricao:"Uma espadachim extremamente habilidosa."},
-{nome:"Akane Owari",talento:"Ultimate Gymnast",jogo:"goodbye",descricao:"Uma ginasta energética e competitiva."},
-{nome:"Nekomaru Nidai",talento:"Ultimate Team Manager",jogo:"goodbye",descricao:"Um treinador dedicado que incentiva seus companheiros."},
-{nome:"Mikan Tsumiki",talento:"Ultimate Nurse",jogo:"goodbye",descricao:"Uma enfermeira cuidadosa e bastante nervosa."},
-{nome:"Ibuki Mioda",talento:"Ultimate Musician",jogo:"goodbye",descricao:"Uma musicista animada que ama rock."},
-{nome:"Hiyoko Saionji",talento:"Ultimate Traditional Dancer",jogo:"goodbye",descricao:"Uma dançarina tradicional com uma personalidade provocadora."},
-{nome:"Mahiru Koizumi",talento:"Ultimate Photographer",jogo:"goodbye",descricao:"Uma fotógrafa que gosta de registrar momentos."},
-{nome:"Teruteru Hanamura",talento:"Ultimate Cook",jogo:"goodbye",descricao:"Um cozinheiro talentoso apaixonado por gastronomia."},
-{nome:"Byakuya Togami",talento:"Ultimate Affluent Progeny",jogo:"goodbye",descricao:"Uma versão misteriosa do estudante conhecido por sua riqueza."},
+{nome:"Hajime Hinata",talento:"Ultimate ???",jogo:"goodbye",descricao:"Um estudante que tenta descobrir a verdade sobre seu próprio passado.",imagem:"assets/Hajime.png"},
+{nome:"Nagito Komaeda",talento:"Ultimate Lucky Student",jogo:"goodbye",descricao:"Um estudante obcecado pela esperança e por seu significado.",imagem:"assets/Nagito.png"},
+{nome:"Chiaki Nanami",talento:"Ultimate Gamer",jogo:"goodbye",descricao:"Uma gamer tranquila que adora videogames.",imagem:"assets/Chiaki.png"},
+{nome:"Sonia Nevermind",talento:"Ultimate Princess",jogo:"goodbye",descricao:"Uma princesa curiosa sobre diferentes culturas.",imagem:"assets/Sonia.png"},
+{nome:"Kazuichi Soda",talento:"Ultimate Mechanic",jogo:"goodbye",descricao:"Um mecânico habilidoso que adora construir e consertar máquinas.",imagem:"assets/Kazuichi.png"},
+{nome:"Gundham Tanaka",talento:"Ultimate Breeder",jogo:"goodbye",descricao:"Um criador de animais com uma personalidade dramática.",imagem:"assets/Gundham.png"},
+{nome:"Fuyuhiko Kuzuryu",talento:"Ultimate Yakuza",jogo:"goodbye",descricao:"Um jovem líder de uma família Yakuza.",imagem:"assets/Fuyuhiko.png"},
+{nome:"Peko Pekoyama",talento:"Ultimate Swordswoman",jogo:"goodbye",descricao:"Uma espadachim extremamente habilidosa.",imagem:"assets/Peko.png"},
+{nome:"Akane Owari",talento:"Ultimate Gymnast",jogo:"goodbye",descricao:"Uma ginasta energética e competitiva.",imagem:"assets/Akane.png"},
+{nome:"Nekomaru Nidai",talento:"Ultimate Team Manager",jogo:"goodbye",descricao:"Um treinador dedicado que incentiva seus companheiros.",imagem:"assets/Nekomaru.png"},
+{nome:"Mikan Tsumiki",talento:"Ultimate Nurse",jogo:"goodbye",descricao:"Uma enfermeira cuidadosa e bastante nervosa.",imagem:"assets/Mikan.png"},
+{nome:"Ibuki Mioda",talento:"Ultimate Musician",jogo:"goodbye",descricao:"Uma musicista animada que ama rock.",imagem:"assets/Ibuki.png"},
+{nome:"Hiyoko Saionji",talento:"Ultimate Traditional Dancer",jogo:"goodbye",descricao:"Uma dançarina tradicional com uma personalidade provocadora.",imagem:"assets/Hiyoko.png"},
+{nome:"Mahiru Koizumi",talento:"Ultimate Photographer",jogo:"goodbye",descricao:"Uma fotógrafa que gosta de registrar momentos.",imagem:"assets/Mahiru.png"},
+{nome:"Teruteru Hanamura",talento:"Ultimate Cook",jogo:"goodbye",descricao:"Um cozinheiro talentoso apaixonado por gastronomia.",imagem:"assets/Teruteru.png"},
+{nome:"Byakuya Togami",talento:"Ultimate Affluent Progeny",jogo:"goodbye",descricao:"O misterioso impostor que assume a identidade de Byakuya Togami.",imagem:"assets/impostor.png"},
 
 {nome:"Shuichi Saihara",talento:"Ultimate Detective",jogo:"killing",descricao:"Um detetive que precisa aprender a confiar em suas próprias conclusões."},
 {nome:"Kaede Akamatsu",talento:"Ultimate Pianist",jogo:"killing",descricao:"Uma pianista otimista que acredita no poder da música."},
@@ -531,6 +491,43 @@ const personagensElenco=[
 {nome:"Monomi",talento:"Magical Girl / Teacher",jogo:"outros",descricao:"Uma coelha que tenta ensinar e proteger os estudantes."}
 ];
 
+// FUNÇÃO PARA COLOCAR IMAGENS
+function colocarImagem(avatar,personagem){
+    const iniciais=personagem.nome.split(" ")
+        .map(p=>p[0]).slice(0,2).join("");
+
+    avatar.innerHTML="";
+
+    if(!personagem.imagem){
+        avatar.textContent=iniciais;
+        return;
+    }
+
+    const img=document.createElement("img");
+    img.alt=personagem.nome;
+
+    const caminhos=[
+        personagem.imagem,
+        personagem.imagem.replace(/\.png$/i,".Png"),
+        personagem.imagem.replace(/\.png$/i,".PNG")
+    ];
+
+    let tentativa=0;
+
+    img.onerror=function(){
+        tentativa++;
+        if(tentativa<caminhos.length){
+            img.src=caminhos[tentativa];
+        }else{
+            avatar.innerHTML="";
+            avatar.textContent=iniciais;
+        }
+    };
+
+    img.src=caminhos[0];
+    avatar.appendChild(img);
+}
+
 // MOSTRAR ELENCO COM FOTOS
 function mostrarElenco(filtro="todos"){
     const lista=document.getElementById("lista-personagens");
@@ -544,26 +541,10 @@ function mostrarElenco(filtro="todos"){
         const card=document.createElement("div");
         card.className="card-elenco";
 
-        const iniciais=p.nome.split(" ")
-            .map(parte=>parte[0]).slice(0,2).join("");
-
         const avatar=document.createElement("div");
         avatar.className="avatar-elenco";
 
-        if(p.imagem){
-            const img=document.createElement("img");
-            img.src=p.imagem;
-            img.alt=p.nome;
-
-            img.onerror=function(){
-                avatar.innerHTML="";
-                avatar.textContent=iniciais;
-            };
-
-            avatar.appendChild(img);
-        }else{
-            avatar.textContent=iniciais;
-        }
+        colocarImagem(avatar,p);
 
         const titulo=document.createElement("h3");
         titulo.textContent=p.nome;
@@ -602,25 +583,7 @@ function abrirFicha(personagem){
     };
 
     const avatar=document.getElementById("ficha-avatar");
-    const iniciais=personagem.nome.split(" ")
-        .map(p=>p[0]).slice(0,2).join("");
-
-    avatar.innerHTML="";
-
-    if(personagem.imagem){
-        const img=document.createElement("img");
-        img.src=personagem.imagem;
-        img.alt=personagem.nome;
-
-        img.onerror=function(){
-            avatar.innerHTML="";
-            avatar.textContent=iniciais;
-        };
-
-        avatar.appendChild(img);
-    }else{
-        avatar.textContent=iniciais;
-    }
+    colocarImagem(avatar,personagem);
 
     document.getElementById("ficha-nome").textContent=personagem.nome;
     document.getElementById("ficha-talento").textContent=personagem.talento;
